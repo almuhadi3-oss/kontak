@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="id">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Berita Dinas Sosial</title>
+        <link rel="icon" href="gambar/logodinassosial.png" />
+        <script src="https://unpkg.com/feather-icons"></script>
+
+        <style>
+            /* ========== GLOBAL STYLES ========== */
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+                font-family: "Poppins", sans-serif;
+            }
+            body {
+                background: #f8f9fa;
+                color: #222;
+                line-height: 1.6;
+            }
+            a {
+                text-decoration: none;
+                color: inherit;
+            }
+
+            /* ========== HEADER SECTION ========== */
+            header {
+                border-top: 5px solid #0a3d62;
+                background: #fff;
+                box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+                position: sticky;
+                top: 0;
+                z-index: 999;
+            }
+
+            .header-top {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 0.8rem 2rem;
+                flex-wrap: wrap;
+            }
+
+            .logo-area {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+            }
+            .logo-area img {
+                width: 80px;
+                height: 70px;
+            }
+
+            .header-title {
+                font-size: 1.8rem;
+                font-weight: 600;
+                color: #0a3d62;
+            }
+
+            .search-wrapper input {
+                padding: 0.4rem 0.8rem;
+                border: 1px solid #ccc;
+                border-radius: 6px;
+                width: 300px;
+            }
+
+            nav {
+                background: #0a3d62;
+            }
+
+            .navbar {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                gap: 2rem;
+                padding: 0.8rem 1rem;
+                list-style: none;
+            }
+
+            .navbar a {
+                color: #fff;
+                font-weight: 500;
+            }
+
+            .menu-toggle {
+                display: none;
+                color: rgb(36, 8, 244);
+                cursor: pointer;
+                size: 1.5rem;
+            }
+
+            @media (max-width: 768px) {
+                .navbar {
+                    display: none;
+                    flex-direction: column;
+                    background: #0a3d62;
+                }
+                .navbar.active {
+                    display: flex;
+                }
+                .menu-toggle {
+                    display: block;
+                    position: absolute;
+                    top: 18px;
+                    right: 20px;
+                }
+                .search-wrapper input {
+                    width: 100%;
+                    margin-top: 0.5rem;
+                }
+            }
+
+            /* ========== HERO SECTION ========== */
+            .hero {
+                position: relative;
+                width: 100%;
+                height: 50vh;
+                background: url("gambar/berita.png") center/cover no-repeat;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .hero::after {
+                content: "";
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: rgba(0, 0, 0, 0.45);
+            }
+
+            .hero-content {
+                position: relative;
+                text-align: center;
+                color: white;
+                z-index: 2;
+            }
+
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            /* ========== BERITA SECTION ========== */
+            .berita {
+                padding: 4rem 2rem;
+                background: #fff;
+            }
+
+            .berita h2 {
+                text-align: center;
+                font-size: 2rem;
+                color: #0a3d62;
+                margin-bottom: 2rem;
+            }
+
+            .berita-container {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 2rem;
+            }
+
+            .berita-card {
+                flex: 1 1 320px;
+                background: #fdfdfd;
+                border-radius: 12px;
+                overflow: hidden;
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+                transition: transform 0.3s ease;
+                cursor: pointer;
+            }
+
+            .berita-card:hover {
+                transform: translateY(-5px);
+            }
+
+            .berita-card img {
+                width: 100%;
+                height: 200px;
+                object-fit: cover;
+            }
+
+            .berita-card-content {
+                padding: 1rem 1.2rem;
+            }
+
+            .berita-card-content h3 {
+                color: #0a3d62;
+                font-size: 1.1rem;
+                margin-bottom: 0.5rem;
+            }
+
+            .berita-card-content p {
+                font-size: 0.95rem;
+                color: #444;
+            }
+
+            .loading {
+                text-align: center;
+                padding: 2rem;
+                font-size: 1.1rem;
+                color: #666;
+            }
+
+            .error-message {
+                text-align: center;
+                padding: 2rem;
+                color: #d9534f;
+                background: #f2dede;
+                border: 1px solid #ebccd1;
+                border-radius: 4px;
+                margin: 1rem 0;
+            }
+
+            @media (max-width: 768px) {
+                .berita-card {
+                    flex: 1 1 100%;
+                }
+            }
+
+            /* ========== FOOTER SECTION ========== */
+            footer {
+                background: #0a3d62;
+                color: white;
+                text-align: center;
+                padding: 2rem 1rem;
+            }
+
+            .footer-content {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 2rem;
+            }
+
+            .footer-content div {
+                flex: 1 1 250px;
+            }
+
+            .footer-content h4 {
+                margin-bottom: 0.8rem;
+            }
+
+            .footer-content a {
+                color: #f8f9fa;
+                text-decoration: none;
+            }
+
+            .footer-content a:hover {
+                text-decoration: underline;
+            }
+        </style>
+    </head>
+    <body>
+        <!-- ===== HEADER SECTION ===== -->
+        <header>
+            <div class="header-top">
+                <div class="logo-area">
+                    <img src="gambar/KAB.Inhil.jpg" alt="Logo Dinas Sosial" />
+                    <img src="gambar/KEMENSOS.jpg" alt="Logo Dinas Sosial" />
+                    <img src="gambar/berakhlak.png" alt="Logo Dinas Sosial" />
+                    <img src="gambar/bangga.png" alt="Logo Dinas Sosial" />
+                    <span class="header-title"
+                        >Dinas Sosial Kabupaten Indragiri Hilir</span
+                    >
+                </div>
+                <div class="search-wrapper">
+                    <input type="text" placeholder="Cari berita..." />
+                </div>
+                <i data-feather="menu" class="menu-toggle"></i>
+            </div>
+            <nav>
+                <ul class="navbar">
+                    <li><a href="index.html">Beranda</a></li>
+                    <li><a href="layanan.html">Layanan</a></li>
+                    <li>
+                        <a href="berita-dynamic.html" class="active">Berita</a>
+                    </li>
+                    <li><a href="profil.html">Profil</a></li>
+                    <li><a href="kontak.html">Kontak</a></li>
+                    <li><a href="cek-laporan.html">cek laporan</a></li>
+                    <li><a href="admin.php">Admin</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <!-- ===== HERO SECTION ===== -->
+        <section class="hero">
+            <div class="hero-content">
+                <h1>Berita & Informasi Terkini</h1>
+            </div>
+        </section>
+
+        <!-- ===== BERITA SECTION ===== -->
+        <section class="berita">
+            <h2>Berita Dinas Sosial Kabupaten Indragiri Hilir</h2>
+            <div id="berita-container" class="berita-container">
+                <!-- News will be loaded dynamically -->
+            </div>
+            <div id="loading" class="loading">Memuat berita...</div>
+            <div
+                id="error-message"
+                class="error-message"
+                style="display: none"
+            ></div>
+        </section>
+
+        <!-- ===== FOOTER SECTION ===== -->
+        <footer>
+            <div class="footer-content">
+                <!-- Alamat -->
+                <div>
+                    <h4>Dinas Sosial Kabupaten Indragiri Hilir</h4>
+                    <p>
+                        <a
+                            href="https://www.google.com/maps/place/Dinas+Sosial+Kabupaten+Indragiri+Hilir,+Jl.+Bunga+No.07,+Tembilahan,+Indragiri+Hilir,+Riau+29211"
+                            target="_blank"
+                            style="color: white; text-decoration: none"
+                            title="Lihat lokasi di Google Maps"
+                        >
+                            Jl. Bunga Nomor 07, Tembilahan, Indragiri Hilir,
+                            Riau 29211
+                        </a>
+                    </p>
+                </div>
+
+                <!-- Kontak -->
+                <div>
+                    <h4>Kontak</h4>
+                    <p>
+                        Telp: (0768) 24795 <br />
+                        Email:
+                        <a
+                            href="mailto:dinsosinhil@gmail.com"
+                            style="color: white; text-decoration: none"
+                            title="Kirim email ke Dinas Sosial Indragiri Hilir"
+                        >
+                            dinsosinhil@gmail.com
+                        </a>
+                    </p>
+                </div>
+
+                <!-- Media Sosial -->
+                <div>
+                    <h4>Ikuti Kami</h4>
+                    <p>
+                        <a
+                            href="https://www.facebook.com/people/Dinas-Sosial-Indragiri-Hilir/100095172665432/"
+                            target="_blank"
+                            style="
+                                color: white;
+                                margin-right: 10px;
+                                display: inline-flex;
+                                align-items: center;
+                            "
+                        >
+                            <i
+                                data-feather="facebook"
+                                style="margin-right: 6px"
+                            ></i>
+                            Facebook
+                        </a>
+                        |
+                        <a
+                            href="https://www.instagram.com/dinassosial.inhil/"
+                            target="_blank"
+                            style="
+                                color: white;
+                                margin-left: 10px;
+                                display: inline-flex;
+                                align-items: center;
+                            "
+                        >
+                            <i
+                                data-feather="instagram"
+                                style="margin-right: 6px"
+                            ></i>
+                            Instagram
+                        </a>
+                    </p>
+                </div>
+            </div>
+
+            <p style="margin-top: 1rem; font-size: 0.9rem">
+                © 2025 Dinas Sosial Kabupaten Indragiri Hilir. All Rights
+                Reserved.
+            </p>
+        </footer>
+
+        <script>
+            feather.replace();
+            const menuToggle = document.querySelector(".menu-toggle");
+            const navbar = document.querySelector(".navbar");
+            menuToggle.addEventListener("click", () => {
+                navbar.classList.toggle("active");
+            });
+
+            // Load news from API
+            async function loadNews() {
+                const container = document.getElementById("berita-container");
+                const loading = document.getElementById("loading");
+                const errorMessage = document.getElementById("error-message");
+
+                try {
+                    loading.style.display = "block";
+                    errorMessage.style.display = "none";
+
+                    const response = await fetch("/api/berita");
+                    if (!response.ok) {
+                        throw new Error("Gagal memuat berita");
+                    }
+
+                    const news = await response.json();
+
+                    if (news.length === 0) {
+                        container.innerHTML =
+                            '<p style="text-align: center; padding: 2rem; color: #666;">Belum ada berita yang tersedia.</p>';
+                    } else {
+                        container.innerHTML = news
+                            .map(
+                                (item) => `
+                            <div class="berita-card">
+                                <img src="/storage/${item.gambar}" alt="${
+                                    item.judul
+                                }" onerror="this.src='https://via.placeholder.com/600x400'">
+                                <div class="berita-card-content">
+                                    <h3>${item.judul}</h3>
+                                    <p>${item.isi.substring(0, 150)}${
+                                    item.isi.length > 150 ? "..." : ""
+                                }</p>
+                                </div>
+                            </div>
+                        `
+                            )
+                            .join("");
+                    }
+                } catch (error) {
+                    console.error("Error loading news:", error);
+                    errorMessage.textContent =
+                        "Gagal memuat berita. Silakan coba lagi nanti.";
+                    errorMessage.style.display = "block";
+                    container.innerHTML = "";
+                } finally {
+                    loading.style.display = "none";
+                }
+            }
+
+            // Search functionality
+            const searchInput = document.querySelector(".search-wrapper input");
+            searchInput.addEventListener("input", function () {
+                const query = this.value.toLowerCase();
+                const beritaCards = document.querySelectorAll(".berita-card");
+
+                beritaCards.forEach((card) => {
+                    const text = card.textContent.toLowerCase();
+                    card.style.display = text.includes(query)
+                        ? "block"
+                        : "none";
+                });
+            });
+
+            // Load news when page loads
+            document.addEventListener("DOMContentLoaded", loadNews);
+        </script>
+    </body>
+</html>

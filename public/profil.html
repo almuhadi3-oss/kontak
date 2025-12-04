@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="id">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Profil Dinas Sosial</title>
+        <link rel="icon" href="gambar/logodinassosial.png" />
+        <script src="https://unpkg.com/feather-icons"></script>
+
+        <style>
+            /* ========== GLOBAL STYLES ========== */
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+                font-family: "Poppins", sans-serif;
+            }
+            body {
+                background: #f8f9fa;
+                color: #222;
+                line-height: 1.6;
+            }
+            a {
+                text-decoration: none;
+                color: inherit;
+            }
+            img {
+                max-width: 100%;
+                border-radius: 12px;
+            }
+
+            /* ========== HEADER SECTION ========== */
+            header {
+                border-top: 5px solid #0a3d62;
+                background: #fff;
+                box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+                position: sticky;
+                top: 0;
+                z-index: 999;
+            }
+
+            .header-top {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 0.8rem 2rem;
+                flex-wrap: wrap;
+            }
+
+            .logo-area {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+            }
+            .logo-area img {
+                width: 80px;
+                height: 70px;
+            }
+
+            .header-title {
+                font-size: 1.8rem;
+                font-weight: 600;
+                color: #0a3d62;
+            }
+
+            .search-wrapper input {
+                padding: 0.4rem 0.8rem;
+                border: 1px solid #ccc;
+                border-radius: 6px;
+                width: 300px;
+            }
+
+            nav {
+                background: #0a3d62;
+            }
+
+            .navbar {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                gap: 2rem;
+                padding: 0.8rem 1rem;
+                list-style: none;
+            }
+
+            .navbar a {
+                color: #fff;
+                font-weight: 500;
+            }
+
+            .menu-toggle {
+                display: none;
+                color: rgb(36, 8, 244);
+                cursor: pointer;
+                size: 1.5rem;
+            }
+
+            @media (max-width: 768px) {
+                .navbar {
+                    display: none;
+                    flex-direction: column;
+                    background: #0a3d62;
+                }
+                .navbar.active {
+                    display: flex;
+                }
+                .menu-toggle {
+                    display: block;
+                    position: absolute;
+                    top: 18px;
+                    right: 20px;
+                }
+                .search-wrapper input {
+                    width: 100%;
+                    margin-top: 0.5rem;
+                }
+            }
+
+            /* ========== HERO SECTION ========== */
+            .hero {
+                position: relative;
+                width: 100%;
+                height: 60vh;
+                background: url("gambar/profil.png") center/cover no-repeat;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .hero::after {
+                content: "";
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: rgba(0, 0, 0, 0.45);
+            }
+
+            .hero-content {
+                position: relative;
+                text-align: center;
+                color: white;
+                z-index: 2;
+            }
+
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            /* ========== PROFIL SECTION ========== */
+            .profil {
+                padding: 4rem 2rem;
+                background: #fff;
+            }
+
+            .profil-container {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                flex-wrap: wrap;
+                gap: 2rem;
+                max-width: 1100px;
+                margin: 0 auto;
+            }
+
+            .profil-text {
+                flex: 1 1 500px;
+            }
+
+            .profil-text h2 {
+                color: #0a3d62;
+                font-size: 2rem;
+                margin-bottom: 1rem;
+            }
+
+            .profil-text p {
+                font-size: 1rem;
+                color: #444;
+            }
+
+            .profil-img {
+                flex: 1 1 400px;
+                text-align: center;
+            }
+
+            @media (max-width: 768px) {
+                .profil-container {
+                    flex-direction: column;
+                    text-align: center;
+                }
+            }
+
+            /* ========== VISI MISI SECTION ========== */
+            .visi-misi {
+                background: #f4f6f7;
+                padding: 4rem 2rem;
+            }
+
+            .visi-misi h2 {
+                text-align: center;
+                color: #0a3d62;
+                font-size: 2rem;
+                margin-bottom: 2rem;
+            }
+
+            .visi,
+            .misi {
+                max-width: 900px;
+                margin: 0 auto 2rem auto;
+            }
+
+            .visi h3,
+            .misi h3 {
+                color: #0a3d62;
+                margin-bottom: 1rem;
+            }
+
+            .misi ul {
+                list-style: disc;
+                margin-left: 1.5rem;
+            }
+
+            /* ========== FOOTER SECTION ========== */
+            footer {
+                background: #0a3d62;
+                color: white;
+                text-align: center;
+                padding: 2rem 1rem;
+            }
+
+            .footer-content {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 2rem;
+            }
+
+            .footer-content div {
+                flex: 1 1 250px;
+            }
+
+            .footer-content h4 {
+                margin-bottom: 0.8rem;
+            }
+
+            .footer-content a {
+                color: #f8f9fa;
+                text-decoration: none;
+            }
+
+            .footer-content a:hover {
+                text-decoration: underline;
+            }
+
+            /* ========== STRUKTUR ORGANISASI SECTION ========== */
+            .struktur {
+                background: #fff;
+                padding: 4rem 2rem;
+                text-align: center;
+            }
+
+            .struktur h2 {
+                color: #0a3d62;
+                font-size: 2rem;
+                margin-bottom: 2rem;
+            }
+
+            .struktur-container img {
+                max-width: 800px;
+                width: 100%;
+                border-radius: 10px;
+                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+                cursor: pointer;
+                transition: transform 0.3s ease;
+            }
+
+            .struktur-container img:hover {
+                transform: scale(1.02);
+            }
+
+            .struktur .caption {
+                margin-top: 1rem;
+                font-size: 0.95rem;
+                color: #555;
+            }
+
+            /* Lightbox Modal */
+            .modal {
+                display: none;
+                position: fixed;
+                z-index: 1000;
+                padding-top: 80px;
+                left: 0;
+                top: 0;
+                width: 100%;
+                height: 100%;
+                overflow: auto;
+                background-color: rgba(0, 0, 0, 0.9);
+            }
+
+            .modal-content {
+                margin: auto;
+                display: block;
+                max-width: 90%;
+                border-radius: 10px;
+            }
+
+            .close {
+                position: absolute;
+                top: 40px;
+                right: 60px;
+                color: white;
+                font-size: 40px;
+                font-weight: bold;
+                cursor: pointer;
+            }
+
+            @media (max-width: 768px) {
+                .modal-content {
+                    max-width: 95%;
+                }
+                .close {
+                    top: 20px;
+                    right: 25px;
+                    font-size: 30px;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <!-- ===== HEADER SECTION ===== -->
+        <header>
+            <div class="header-top">
+                <div class="logo-area">
+                    <img src="gambar/KAB.Inhil.jpg" alt="Logo Dinas Sosial" />
+                    <img src="gambar/KEMENSOS.jpg" alt="Logo Dinas Sosial" />
+                    <img src="gambar/berakhlak.png" alt="Logo Dinas Sosial" />
+                    <img src="gambar/bangga.png" alt="Logo Dinas Sosial" />
+                    <span class="header-title"
+                        >Dinas Sosial Kabupaten Indragiri Hilir</span
+                    >
+                </div>
+                <div class="search-wrapper">
+                    <input type="text" placeholder="Cari profil..." />
+                </div>
+                <i data-feather="menu" class="menu-toggle"></i>
+            </div>
+            <nav>
+                <ul class="navbar">
+                    <li><a href="index.html">Beranda</a></li>
+                    <li><a href="layanan.html">Layanan</a></li>
+                    <li><a href="berita.html">Berita</a></li>
+                    <li><a href="profil.html" class="active">Profil</a></li>
+                    <li><a href="kontak.html">Kontak</a></li>
+                    <li><a href="cek-laporan.html">cek laporan</a></li>
+                    <li><a href="admin.php">Admin</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <!-- ===== HERO SECTION ===== -->
+        <section class="hero">
+            <div class="hero-content">
+                <h1>Profil Dinas Sosial</h1>
+            </div>
+        </section>
+
+        <!-- ===== PROFIL SECTION ===== -->
+        <section class="profil">
+            <div class="profil-container">
+                <div class="profil-img">
+                    <img src="gambar/profil1.png" alt="Gedung Dinas Sosial" />
+                </div>
+                <div class="profil-text">
+                    <h2>Tentang Kami</h2>
+                    <p>
+                        Kesejahteraan adalah suatu tata kehidupan dan
+                        penghidupan sosial, materal maupun spiritual yang
+                        diliputi rasa keselamatan, kesosialan dan ketentraman
+                        lahir dan batin, yang memungkinkan bagi setiap warga
+                        Negara untuk mengelola usaha pemenuh kebutuhan jasmani,
+                        rohani dan sosial yang sebaik-baiknya bagi keluarga,
+                        serta masyarakat dan menjunjung tinggi hak-hak Asasi
+                        serta kewajiban manusia sesuai dengan Pancasila. (UU No.
+                        6 Tahun 1974, pokok pembangunan kesejahteraan sosial).
+                    </p>
+                    <p style="margin-top: 1rem">
+                        Krisis yang terjadi diberbagai bidang kehidupan saat
+                        ini, terutama krisis ekonomi telah menimbulkan berbagai
+                        dampak permasalahan yang sangat luas dibidang
+                        kesejahteraan, dimana Penyandang Masalah Kesejahteraan
+                        Sosial (PMKS) menunjukan kecenderungan yang meningkat,
+                        secara kuantitas maupun kualitasnya.
+                    </p>
+                    <p style="margin-top: 1rem">
+                        Laju pembangunan di wilayah Kabupaten Indragiri Hilir
+                        juga menimbulkan dampak negatif khususnya di bidang
+                        kesejahteraan sosial, seperti bertambahnya pendatang
+                        pencari kerja, sarana komunikasi dan informasi tanpa
+                        adanya Filter penyaring (TV, VCD, HP, dan sebagainya).
+                        Kemajuan teknologi komunikasi dan informasi berpengaruh
+                        pada perilaku dan sikap masyarakat, terutama generasi
+                        muda yang belum siap mencegah pengaruh buruk (Cultural
+                        Lag), yang pada akhirnya dapat menimbulkan permasalahan
+                        sosial.
+                    </p>
+                    <p style="margin-top: 1rem">
+                        Dinas Sosial Kabupaten Indragiri Hilir adalah perangkat
+                        daerah yang mempunyai wewenang, tugas dan tanggung jawab
+                        untuk melaksanakan otonomi daerah, desentralisasi dan
+                        dekonsentralisasi serta tugas pembantuan dibidang
+                        Kesejahteraan Sosial (Perda Kabupaten Indragiri Hilir
+                        No. 12 Tahun 2004).
+                    </p>
+                    <p style="margin-top: 1rem">
+                        Selaras dengan hal tersebut di atas, serta mengacu pada
+                        visi dan misi Kabupaten Indragiri Hilir dan Renstra
+                        Kabupaten Indragiri Hilir Tahun 2005-2009 maka sesuai
+                        dengan kedudukan, tugas pokok dan fungsinya, Dinas
+                        Sosial Kabupaten Indragiri Hilir telah menyusun rencana
+                        strategis untuk tahun 2005-2009. Lingkungan Internal
+                        merupakan factor kekuatan dan kelemahan Dinas Sosial
+                        yang mendukung atau yang akan menghambat pencapaian
+                        suatu visi.
+                    </p>
+                    <p style="margin-top: 1rem">
+                        Sumber Daya Manusia (SDM) yang tersedia pada Dinas
+                        Sosial Kabupaten Indragiri Hilir berjumlah 28 orang
+                        berstatus Pegawai Negeri Sipil, 1 orang berstatus PPPK
+                        dan 28 orang tenaga Honorer.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== VISI MISI SECTION ===== -->
+        <section class="visi-misi">
+            <h2>Visi & Misi</h2>
+            <div class="visi">
+                <h3>Visi</h3>
+                <p>
+                    <i
+                        >“Terwujudnya Dinas Sosial Kabupaten Indragiri Hilir
+                        Sebagai pelaksana pembangunan bidang kesejahteraan
+                        sosial yang berdasarkan kesadaran, kesetiakawan,
+                        tanggung jawab dan partisipasi sosial pada tahun
+                        2020”.</i
+                    >
+                </p>
+                <p style="margin-top: 1rem">penjelasan visi :</p>
+                <p style="margin-top: 1rem">
+                    1. Terwujudnya Dinas Sosial Kabupaten Indragiri Hilir
+                    sebagai pelaksana, berarti Dinas Sosial mampu memberikan
+                    dukungan terhadap pembangunan diberbagai sector, yang pada
+                    akhirnya akan memberikan konstribusi terhadap tercapainya
+                    visi Kabupaten Indragiri Hilir
+                </p>
+                <p style="margin-top: 1rem">
+                    2. Pembangunan bidang kesejahteraan sosial yang berdasarkan
+                    kesadaran, kesetiakawan sosial, tanggung jawab dan
+                    partisipasi sosial, merupakan suatu proses yang terencana
+                    dan terarah dalam merumuskan pembangunan dengan perhatikan
+                    keseimbangan antara optimalisasi, manfaat dan kepentingan
+                    masyarat serta melibatkan peran serta aktif masyarakat
+                    sebagai objek dan subjek pembangunan yang tercermin dalam
+                    harmonisasi usaha Kesejahteraan Sosial.
+                </p>
+            </div>
+
+            <div class="misi">
+                <h3>Misi</h3>
+                <ul>
+                    <li>
+                        Mewujudkan data informasi bidang kesejahteraan sosial
+                        yang lengkap dan akurat.
+                    </li>
+                    <li>
+                        Mewujudkan pembinaan dan pengembangan bidang
+                        kesejahteraan sosial yang transparan dan kondusif.
+                    </li>
+                    <li>
+                        Mewujudkan Sumber Daya Manusia dibidang kesejahteraan
+                        sosial yang profesional.
+                    </li>
+                    <li>
+                        Mewujudkan pengawasan dan pengandalian pembangunan
+                        bidang kesejahteraan sosial secara efektif dan efesien.
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- ===== STRUKTUR ORGANISASI SECTION ===== -->
+        <section class="struktur">
+            <h2>Struktur Organisasi</h2>
+            <div class="struktur-container">
+                <img
+                    src="gambar/struktur-organisasi.png"
+                    alt="Struktur Organisasi Dinas Sosial Kabupaten Indragiri Hilir"
+                    id="strukturImg"
+                />
+                <p class="caption">
+                    Bagan Struktur Organisasi Dinas Sosial Kabupaten Indragiri
+                    Hilir
+                </p>
+            </div>
+        </section>
+
+        <!-- Modal (Lightbox) -->
+        <div id="imgModal" class="modal">
+            <span class="close">&times;</span>
+            <img class="modal-content" id="imgPreview" />
+        </div>
+
+        <!-- ===== FOOTER SECTION ===== -->
+        <footer>
+            <div class="footer-content">
+                <!-- Alamat -->
+                <div>
+                    <h4>Dinas Sosial Kabupaten Indragiri Hilir</h4>
+                    <p>
+                        <a
+                            href="https://www.google.com/maps/place/Dinas+Sosial+Kabupaten+Indragiri+Hilir,+Jl.+Bunga+No.07,+Tembilahan,+Indragiri+Hilir,+Riau+29211"
+                            target="_blank"
+                            style="color: white; text-decoration: none"
+                            title="Lihat lokasi di Google Maps"
+                        >
+                            Jl. Bunga Nomor 07, Tembilahan, Indragiri Hilir,
+                            Riau 29211
+                        </a>
+                    </p>
+                </div>
+
+                <!-- Kontak -->
+                <div>
+                    <h4>Kontak</h4>
+                    <p>
+                        Telp: (0768) 24795 <br />
+                        Email:
+                        <a
+                            href="mailto:dinsosinhil@gmail.com"
+                            style="color: white; text-decoration: none"
+                            title="Kirim email ke Dinas Sosial Indragiri Hilir"
+                        >
+                            dinsosinhil@gmail.com
+                        </a>
+                    </p>
+                </div>
+
+                <!-- Media Sosial -->
+                <div>
+                    <h4>Ikuti Kami</h4>
+                    <p>
+                        <a
+                            href="https://www.facebook.com/people/Dinas-Sosial-Indragiri-Hilir/100095172665432/"
+                            target="_blank"
+                            style="
+                                color: white;
+                                margin-right: 10px;
+                                display: inline-flex;
+                                align-items: center;
+                            "
+                        >
+                            <i
+                                data-feather="facebook"
+                                style="margin-right: 6px"
+                            ></i>
+                            Facebook
+                        </a>
+                        |
+                        <a
+                            href="https://www.instagram.com/dinassosial.inhil/"
+                            target="_blank"
+                            style="
+                                color: white;
+                                margin-left: 10px;
+                                display: inline-flex;
+                                align-items: center;
+                            "
+                        >
+                            <i
+                                data-feather="instagram"
+                                style="margin-right: 6px"
+                            ></i>
+                            Instagram
+                        </a>
+                    </p>
+                </div>
+            </div>
+
+            <p style="margin-top: 1rem; font-size: 0.9rem">
+                © 2025 Dinas Sosial Kabupaten Indragiri Hilir. All Rights
+                Reserved.
+            </p>
+        </footer>
+
+        <script>
+            feather.replace();
+            const menuToggle = document.querySelector(".menu-toggle");
+            const navbar = document.querySelector(".navbar");
+            menuToggle.addEventListener("click", () => {
+                navbar.classList.toggle("active");
+            });
+
+            // Search functionality
+            const searchInput = document.querySelector(".search-wrapper input");
+            searchInput.addEventListener("input", function () {
+                const query = this.value.toLowerCase();
+                const paragraphs = document.querySelectorAll(
+                    ".profil-text p, .visi-misi p, .struktur p"
+                );
+
+                paragraphs.forEach((p) => {
+                    const text = p.textContent.toLowerCase();
+                    p.style.display = text.includes(query) ? "block" : "none";
+                });
+            });
+
+            // Lightbox (klik gambar untuk memperbesar)
+            const modal = document.getElementById("imgModal");
+            const img = document.getElementById("strukturImg");
+            const modalImg = document.getElementById("imgPreview");
+            const closeBtn = document.querySelector(".close");
+
+            img.addEventListener("click", function () {
+                modal.style.display = "block";
+                modalImg.src = this.src;
+            });
+
+            closeBtn.addEventListener("click", function () {
+                modal.style.display = "none";
+            });
+
+            window.addEventListener("click", function (e) {
+                if (e.target === modal) {
+                    modal.style.display = "none";
+                }
+            });
+        </script>
+    </body>
+</html>

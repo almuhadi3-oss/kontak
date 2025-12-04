@@ -1,0 +1,1294 @@
+<!DOCTYPE html>
+<html lang="id">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Form Pengaduan Masyarakat - Dinas Sosial</title>
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+        />
+        <script src="https://unpkg.com/feather-icons"></script>
+        <style>
+            /* ========== GLOBAL STYLES ========== */
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+                font-family: "Poppins", sans-serif;
+            }
+            body {
+                color: #222;
+                background: #f8f9fa;
+                line-height: 1.6;
+            }
+            a {
+                color: inherit;
+                text-decoration: none;
+            }
+            img {
+                max-width: 100%;
+                border-radius: 8px;
+            }
+
+            /* ========== HEADER SECTION ========== */
+            header {
+                border-top: 5px solid #0a3d62;
+                background: #fff;
+                box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+                position: sticky;
+                top: 0;
+                z-index: 999;
+            }
+
+            .header-top {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 0.8rem 2rem;
+                flex-wrap: wrap;
+            }
+
+            .logo-area {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+            }
+            .logo-area img {
+                width: 80px;
+                height: 70px;
+            }
+
+            .header-title {
+                font-size: 1.8rem;
+                font-weight: 600;
+                color: #0a3d62;
+            }
+
+            .search-wrapper input {
+                padding: 0.4rem 0.8rem;
+                border: 1px solid #ccc;
+                border-radius: 6px;
+                width: 300px;
+            }
+
+            nav {
+                background: #0a3d62;
+            }
+
+            .navbar {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                gap: 2rem;
+                padding: 0.8rem 1rem;
+                list-style: none;
+            }
+
+            .navbar a {
+                color: #fff;
+                font-weight: 500;
+            }
+
+            .menu-toggle {
+                display: none;
+                color: rgb(36, 8, 244);
+                cursor: pointer;
+                size: 1.5rem;
+            }
+
+            @media (max-width: 768px) {
+                .navbar {
+                    display: none;
+                    flex-direction: column;
+                    background: #0a3d62;
+                }
+                .navbar.active {
+                    display: flex;
+                }
+                .menu-toggle {
+                    display: block;
+                    position: absolute;
+                    top: 18px;
+                    right: 20px;
+                }
+                .search-wrapper input {
+                    width: 100%;
+                    margin-top: 0.5rem;
+                }
+            }
+
+            /* ========== HERO SECTION ========== */
+            .hero {
+                position: relative;
+                width: 100%;
+                height: 80vh;
+                background: url("gambar/index.png") center/cover no-repeat;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .hero::after {
+                content: "";
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: rgba(0, 0, 0, 0.45);
+            }
+
+            .hero-content {
+                position: relative;
+                text-align: center;
+                color: white;
+                z-index: 2;
+            }
+
+            .hero-content h1 {
+                font-size: 2.5rem;
+                margin-bottom: 1rem;
+            }
+
+            .hero-content p {
+                font-size: 1.1rem;
+            }
+
+            /* ========== LAYANAN SECTION ========== */
+            .layanan {
+                padding: 4rem 2rem;
+                background: #fff;
+            }
+
+            .layanan h2 {
+                text-align: center;
+                font-size: 2rem;
+                color: #0a3d62;
+                margin-bottom: 2rem;
+            }
+
+            .layanan-container {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 2rem;
+            }
+
+            .layanan-item {
+                flex: 1 1 280px;
+                padding: 1.5rem;
+                background: #fafafa;
+                border: 1px solid rgba(0, 0, 0, 0.1);
+                border-radius: 12px;
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+                text-align: center;
+                transition: all 0.3s ease;
+                cursor: pointer;
+            }
+
+            .layanan-item:hover {
+                background: #0a3d62;
+                color: white;
+                transform: translateY(-5px);
+            }
+
+            .layanan-item h3 {
+                margin-top: 1rem;
+            }
+
+            @media (max-width: 768px) {
+                .layanan-item {
+                    flex: 1 1 100%;
+                }
+            }
+
+            .lihat-lebih {
+                text-align: right; /* posisikan di kanan */
+                margin-top: 15px;
+            }
+
+            .lihat-lebih a {
+                color: #0a3d62; /* warna biru tema kamu */
+                font-weight: bold;
+                text-decoration: none;
+                transition: color 0.3s;
+            }
+
+            .lihat-lebih a:hover {
+                color: #1e90ff; /* sedikit lebih terang saat hover */
+            }
+
+            /* ========== FOOTER SECTION ========== */
+            footer {
+                background: #0a3d62;
+                color: white;
+                text-align: center;
+                padding: 2rem 1rem;
+            }
+
+            .footer-content {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 2rem;
+            }
+
+            .footer-content div {
+                flex: 1 1 250px;
+            }
+
+            .footer-content h4 {
+                margin-bottom: 0.8rem;
+            }
+
+            .footer-content a {
+                color: #f8f9fa;
+                text-decoration: none;
+            }
+
+            .footer-content a:hover {
+                text-decoration: underline;
+            }
+        </style>
+    </head>
+    <body>
+        <!-- ===== HEADER SECTION ===== -->
+        <header>
+            <div class="header-top">
+                <div class="logo-area">
+                    <img src="gambar/KAB.Inhil.jpg" alt="Logo Dinas Sosial" />
+                    <img src="gambar/KEMENSOS.jpg" alt="Logo Dinas Sosial" />
+                    <img src="gambar/berakhlak.png" alt="Logo Dinas Sosial" />
+                    <img src="gambar/bangga.png" alt="Logo Dinas Sosial" />
+                    <span class="header-title"
+                        >Dinas Sosial Kabupaten Indragiri Hilir</span
+                    >
+                </div>
+                <div class="search-wrapper">
+                    <input
+                        type="text"
+                        placeholder="Cari berita dan layanan..."
+                    />
+                </div>
+                <i data-feather="menu" class="menu-toggle"></i>
+            </div>
+            <nav>
+                <ul class="navbar">
+                    <li><a href="index.html">Beranda</a></li>
+                    <li><a href="layanan.html">Layanan</a></li>
+                    <li><a href="berita.html">Berita</a></li>
+                    <li><a href="profil.html">Profil</a></li>
+                    <li><a href="kontak.html">Kontak</a></li>
+                    <li><a href="cek-laporan.html">cek laporan</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <!-- ===== FORM SECTION ===== -->
+        <section class="pengaduan-section">
+            <div class="container mt-5 mb-5">
+                <h2
+                    id="judulLayanan"
+                    class="text-center mb-4 text-primary fw-bold"
+                >
+                    Form Pengaduan Masyarakat
+                </h2>
+
+                <!-- Form pengaduan: syarat dan upload berkas akan dirender di sini -->
+                <form id="formPengaduan" enctype="multipart/form-data">
+                    <div id="syaratBerkas"></div>
+
+                    <button type="submit" class="btn btn-primary w-100">
+                        Kirim Laporan
+                    </button>
+                </form>
+
+                <div id="hasil" class="alert mt-4 d-none"></div>
+            </div>
+        </section>
+
+        <!-- ===== FOOTER SECTION ===== -->
+        <footer>
+            <div class="footer-content">
+                <!-- Alamat -->
+                <div>
+                    <h4>Dinas Sosial Kabupaten Indragiri Hilir</h4>
+                    <p>
+                        <a
+                            href="https://www.google.com/maps/place/Dinas+Sosial+Kabupaten+Indragiri+Hilir,+Jl.+Bunga+No.07,+Tembilahan,+Indragiri+Hilir,+Riau+29211"
+                            target="_blank"
+                            style="color: white; text-decoration: none"
+                            title="Lihat lokasi di Google Maps"
+                        >
+                            Jl. Bunga Nomor 07, Tembilahan, Indragiri Hilir,
+                            Riau 29211
+                        </a>
+                    </p>
+                </div>
+
+                <!-- Kontak -->
+                <div>
+                    <h4>Kontak</h4>
+                    <p>
+                        Telp: (0768) 24795 <br />
+                        Email:
+                        <a
+                            href="mailto:dinsosinhil@gmail.com"
+                            style="color: white; text-decoration: none"
+                            title="Kirim email ke Dinas Sosial Indragiri Hilir"
+                        >
+                            dinsosinhil@gmail.com
+                        </a>
+                    </p>
+                </div>
+
+                <!-- Media Sosial -->
+                <div>
+                    <h4>Ikuti Kami</h4>
+                    <p>
+                        <a
+                            href="https://www.facebook.com/people/Dinas-Sosial-Indragiri-Hilir/100095172665432/"
+                            target="_blank"
+                            style="
+                                color: white;
+                                margin-right: 10px;
+                                display: inline-flex;
+                                align-items: center;
+                            "
+                        >
+                            <i
+                                data-feather="facebook"
+                                style="margin-right: 6px"
+                            ></i>
+                            Facebook
+                        </a>
+                        |
+                        <a
+                            href="https://www.instagram.com/dinassosial.inhil/"
+                            target="_blank"
+                            style="
+                                color: white;
+                                margin-left: 10px;
+                                display: inline-flex;
+                                align-items: center;
+                            "
+                        >
+                            <i
+                                data-feather="instagram"
+                                style="margin-right: 6px"
+                            ></i>
+                            Instagram
+                        </a>
+                    </p>
+                </div>
+            </div>
+
+            <p style="margin-top: 1rem; font-size: 0.9rem">
+                © 2025 Dinas Sosial Kabupaten Indragiri Hilir. All Rights
+                Reserved.
+            </p>
+        </footer>
+
+        <!-- ===== SCRIPT SECTION ===== -->
+        <script>
+            // Replace icons
+            if (window.feather) {
+                feather.replace();
+            }
+
+            // Navbar toggle untuk mobile (safety null checks)
+            const menuToggle = document.querySelector(".menu-toggle");
+            const navbar = document.querySelector(".navbar");
+            if (menuToggle && navbar) {
+                menuToggle.addEventListener("click", () => {
+                    navbar.classList.toggle("active");
+                });
+            }
+
+            // Ambil ID layanan dari URL dan tampilkan nama + syarat layanan
+            const params = new URLSearchParams(window.location.search);
+            const idRaw = params.get("id");
+            const id = idRaw ? Number(idRaw) : null;
+
+            const daftarLayanan = [
+                "Penyandang Disabilitas",
+                "Anak dan Lanjut Usia",
+                "Program Keluarga Harapan (PKH)",
+                "Bantuan Korban Bencana",
+                "Pengangkatan Anak (COTA)",
+                "Transportasi Rujukan Pasien",
+                "Gelandangan, Pengemis, ODHA",
+                "Pemulangan Orang Terlantar",
+                "Pengusulan PBI APBD dan PBI JK",
+                "Pemutakhiran Data DTKS",
+                "Layanan Rekomendasi Beasiswa Terdaftar dan Tidak Terdaftar di DTKS",
+                "Izin Ziarah TMP Yudha Bhakti",
+                "Izin Sumbangan dan Operasional",
+            ];
+
+            // Elemen utama
+            const judul = document.getElementById("judulLayanan");
+            const syaratContainer = document.getElementById("syaratBerkas");
+            const form = document.getElementById("formPengaduan");
+            const hasil = document.getElementById("hasil");
+
+            // Persyaratan tiap layanan
+            const persyaratan = {
+                1: [
+                    "Surat pengantar dari kades/lurah (mengetahui camat setempat)",
+                    "Foto KK (Kartu Keluarga)",
+                    "Foto KTP (Kartu Tanda Penduduk)",
+                    "BPJS",
+                ],
+                2: [
+                    "Foto KK (Kartu Keluarga)",
+                    "Foto KTP (Kartu Tanda Penduduk)",
+                    "foto BPJS",
+                    "Surat keterangan tidak mampu dari kelurahan/desa",
+                ],
+                3: [
+                    "Foto KK (Kartu Keluarga)",
+                    "Foto KTP (Kartu Tanda Penduduk)",
+                    "Foto Rumah",
+                ],
+                4: [
+                    "Laporan insidentil/surat pengantar dari Kelurahan/Desa atau Camat",
+                    "Foto KK (Kartu Keluarga)",
+                    "Foto KTP (Kartu Tanda Penduduk)",
+                    "Foto Kejadian",
+                ],
+                5: [
+                    "rekomendasi dari Dinas Sosial Kabupaten/Kota",
+                    "Surat permohonan dari pemohon",
+                    "Surat keterangan berbadan sehat dari dokter rumah sakit pemerintah",
+                    "Surat keterangan kesehatan jiwa dari dokter spesialis jiwa dari rumah sakit jiwa (suami/istri)",
+                    "Surat keterangan tentang fungsi organ reproduksi (suami/istri) dari dokter spesialis Obstetric dan Ginekologi dari rumah sakit pemerintah",
+                    "Foto Akte Kelahiran COTA",
+                    "foto akte kelahiran COTA",
+                    "Surat Keterangan catatan kepolisian setempat ",
+                    "Foto Nikah/Kutipan Akte Nikah orang tua COTA",
+                    "Foto kartu keluarga (KK) orang tua COTA",
+                    "Foto KTP (Kartu Tanda Penduduk) orang tua COTA",
+                    "Foto akte kelahiran CAA",
+                    "Surat Keterangan Penghasilan dari tempat bekerja COTA",
+                    "Surat persyaratan persetujuan CAA di Atas kertas Bermaterai Cukup bagi Anak yang telah mampu menyampaikan pendapatnya dan hasil laporan pekerja sosial",
+                    "Surat pernyataan Motivasi COTA mengangkat Anak Demi Kepentingan Bagi Anak dan Perlindungan Anak",
+                    "Surat pernyataan COTA akan memperlakukan anak kandung dan anak angkat tanpa diskriminasi",
+                    "Surat pernyataan bahwa COTA akan memberitahu kepada anak angkat mengenai asal usul dan orang tua kandungnya",
+                    "Surat pernyataan COTA tidak berhak menjadi wali nikah bagi anak angkat perempuan dan memberi kuasa kepada wali hakim",
+                    "Surat pernyataan COTA akan memberikan hak waris/hibah atas harta kepada anak angkat sesuai ketentuan hukum islam yang berlaku di indonesia",
+                    "Surat pernyataan persetujuan Adopsi dari pihak keluarga COTA",
+                    "Laporan sosial CAA yang dibuat oleh pekerja sosial instansi sosial setempat dan pekerja sosial panti/yayasan",
+                    "SK pemberian izin pengasuhan anak",
+                    "Surat/berita acara penyerahan dan kuasa dari pihak ibu kandung kepada instansi sosial setempat dan pekerja sosial panti/yayasan",
+                    "Surat/berita acara penyerahan dan kuasa dari pihak instansi sosial setempat dan pekerja sosial panti/yayasan ",
+                    "Surat perjanjian pengasuhan anak antara panti/yayasan dengan COTA",
+                    "Surat/berita acara penyerahan anak dari panti/yayasan kepada COTA",
+                    "Laporan perkembangan anak yang dibuat oleh pekerja sosial instansi sosial setempat dan pekerja sosial panti/yayasan",
+                    "Foto COTA dan CAA",
+                ],
+                6: [
+                    "Foto kartu keluarga (KK) rangkap 3",
+                    "Foto KTP (Kartu Tanda Penduduk) rangkap 3",
+                    "Surat rujukan dari puskesmas atau rumah sakit",
+                    "BBPJS",
+                    "Foto kartu JKN-KIS/BPJS kelas III rangkap 3",
+                    "Surat keterangan tidak mampu dari kelurahan/desa yang masih berlaku",
+                    "Foto pasien Sedang sakit 4R 3 lembar",
+                    "materai 10.000 2 lembar",
+                    "Pajak menjadi tanggungan keluarga/pasien",
+                    "Tiket transportasi PP",
+                    "No.HP pasien/wali pasien",
+                ],
+                7: [
+                    "Foto KK (Kartu Keluarga)",
+                    "Foto KTP (Kartu Tanda Penduduk)",
+                    "Surat keterangan Tidak Mampu dari kelurahan/desa",
+                ],
+                8: [
+                    "Foto KK (Kartu Keluarga)",
+                    "Foto KTP (Kartu Tanda Penduduk)",
+                    "Surat keterangan dari Kepolisian",
+                ],
+                9: [
+                    "Foto KK (Kartu Keluarga)",
+                    "Foto KTP (Kartu Tanda Penduduk)",
+                    "Surat keterangan tidak mampu dari kelurahan/desa",
+                ],
+                10: ["Berita acara musyawarah kelurahan/desa"],
+                11: {
+                    terdata: [
+                        "Transkrip nilai ",
+                        "Foto KK (Kartu Keluarga)",
+                        "Foto KTP (Kartu Tanda Penduduk)",
+                        "Surat keterangan masih aktif kuliah",
+                        "pas foto 3x4",
+                    ],
+                    tidak_terdata: [
+                        "Surat keterangan tidak mampu dari kelurahan/desa",
+                        "Foto KK (Kartu Keluarga)",
+                        "Foto KTP (Kartu Tanda Penduduk)",
+                        "Transkrip nilai ",
+                        "Transkrip nilai ",
+                        "Surat keterangan masih aktif kuliah",
+                        "pas foto 3x4",
+                        "Foto rumah depan/belakang ukuran 4R",
+                    ],
+                },
+                12: [
+                    "surat permohonan izin untuk melakukan ziarah/wisata ke taman makam pahlawan kepada kepala dinas sosial Indragiri Hilir",
+                ],
+                13: {
+                    izin_sumbangan: [
+                        "nama dan alamat lengkap organisasi",
+                        "waktu pendirian organisasi",
+                        "Susunan pengurus organisasi",
+                        "Kegiatan sosial yang telah dilakukan/dilaksanakan",
+                        "maksud dan tujuan pengumpulan sumbangan",
+                        "waktu penyelenggaraan pengumpulan sumbangan",
+                        "luas wilayah pengumpulan sumbangan",
+                        "cara penyelenggaraan dan penyaluran sumbangan",
+                        "rencana pelaksanaan proyek dan rencana anggaran biaya secara rinci",
+                    ],
+                    izin_operasional: [
+                        "surat permohonan izin operasional",
+                        "akta pendirian yayasan/organisasi sosial",
+                        "anggaran dasar dan anggaran rumah tangga organisasi",
+                        "riwayat sejarah yang melatarbelakangi pendirian organisasi/yayasan",
+                        "memiliki program kerja organisasi",
+                        "susunan pengurus organisasi",
+                        "daftar jenis pelayanan yang diberikan",
+                        "memiliki alamat sekretariat tetap dan jelas",
+                        "sumber pembiayaan atau harta kekayaan yang dimiliki",
+                        "memiliki izin domisili yang diterbitkan oleh pemerintah daerah setempat",
+                        "rekomendasi dan pengisian format registrasi pendaftaran ",
+                        "memiliki NPWP (Nomor Pokok Wajib Pajak) ",
+                        "memiliki rekening bank atas nama organisasi/yayasan",
+                        "foto KTP pengurus (ketua, bendahara, sekretaris)",
+                    ],
+                },
+            };
+
+            // Render persyaratan dan form sesuai layanan
+            function renderPersyaratan() {
+                if (!id || !daftarLayanan[id - 1]) {
+                    syaratContainer.innerHTML =
+                        "<p>Pilih layanan melalui parameter <code>?id=</code> pada URL.</p>";
+                    return;
+                }
+
+                judul.textContent = "Layanan " + daftarLayanan[id - 1];
+
+                const p = persyaratan[id];
+                let daftarHTML = "";
+
+                if (p && p.terdata && p.tidak_terdata) {
+                    daftarHTML = `
+                            <h5>Persyaratan Pelayanan:</h5>
+                            <h6 class="text-primary">Jika Sudah Terdata:</h6>
+                            <ul>${p.terdata
+                                .map((s) => `<li>${s}</li>`)
+                                .join("")}</ul>
+                            <h6 class="text-success mt-3">Jika Belum Terdata:</h6>
+                            <ul>${p.tidak_terdata
+                                .map((s) => `<li>${s}</li>`)
+                                .join("")}</ul>
+                            <h5 class="mt-4">Isi Form Pelayanan:</h5>
+                        `;
+                } else if (Array.isArray(p)) {
+                    daftarHTML = `
+                            <h5>Persyaratan Pelayanan:</h5>
+                            <ol>${p.map((s) => `<li>${s}</li>`).join("")}</ol>
+                            <h5 class="mt-4">Isi Form Pelayanan:</h5>
+                        `;
+                } else if (p && p.izin_sumbangan && p.izin_operasional) {
+                    daftarHTML = `
+                            <h5>Persyaratan Pelayanan:</h5>
+                            <h6 class="text-primary">Izin Sumbangan:</h6>
+                            <ol>${p.izin_sumbangan
+                                .map((s) => `<li>${s}</li>`)
+                                .join("")}</ol>
+                            <h6 class="text-success mt-3">Izin Operasional:</h6>
+                            <ol>${p.izin_operasional
+                                .map((s) => `<li>${s}</li>`)
+                                .join("")}</ol>
+                            <h5 class="mt-4">Isi Form Pelayanan:</h5>
+                        `;
+                } else {
+                    daftarHTML =
+                        "<p>Tidak ada persyaratan khusus untuk layanan ini.</p>";
+                }
+
+                // fields khusus per layanan
+                let fieldsHTML = "";
+                if (id === 1) {
+                    fieldsHTML = `
+                            <div class="mb-3">
+                                <label class="form-label">Surat Pengantar (file)</label>
+                                <input type="file" name="surat_pengantar" class="form-control" accept=".jpg,.jpeg,.png,.pdf" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Nama</label>
+                                <input type="text" name="nama" class="form-control" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Nomor Kartu Keluarga</label>
+                                <input type="text" name="no_kk" class="form-control" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">File Kartu Keluarga</label>
+                                <input type="file" name="kk" class="form-control" accept=".jpg,.jpeg,.png,.pdf" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Nomor Induk Kependudukan (NIK)</label>
+                                <input type="text" name="nik" class="form-control" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">File KTP</label>
+                                <input type="file" name="ktp" class="form-control" accept=".jpg,.jpeg,.png,.pdf" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Nomor BPJS</label>
+                                <input type="text" name="no_bpjs" class="form-control">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">File BPJS</label>
+                                <input type="file" name="bpjs" class="form-control" accept=".jpg,.jpeg,.png,.pdf">
+                            </div>
+                        `;
+                } else if (id === 2) {
+                    fieldsHTML = `
+                            <div class="mb-3">
+                                <label class="form-label">Surat keterangan tidak mampu(file)</label>
+                                <input type="file" name="SKTM" class="form-control" accept=".jpg,.jpeg,.png,.pdf" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Nama</label>
+                                <input type="text" name="nama" class="form-control" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Nomor Kartu Keluarga</label>
+                                <input type="text" name="no_kk" class="form-control" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">File Kartu Keluarga</label>
+                                <input type="file" name="kk" class="form-control" accept=".jpg,.jpeg,.png,.pdf" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Nomor Induk Kependudukan (NIK)</label>
+                                <input type="text" name="nik" class="form-control" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">File KTP</label>
+                                <input type="file" name="ktp" class="form-control" accept=".jpg,.jpeg,.png,.pdf" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Nomor BPJS</label>
+                                <input type="text" name="no_bpjs" class="form-control">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">File BPJS</label>
+                                <input type="file" name="bpjs" class="form-control" accept=".jpg,.jpeg,.png,.pdf">
+                            </div>
+                        `;
+                } else if (id === 3) {
+                    fieldsHTML = `
+                            <div class="mb-3">
+                                <label class="form-label">Foto Rumah</label>
+                                <input type="file" name="foto_rumah" class="form-control" accept=".jpg,.jpeg,.png,.pdf" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Nama</label>
+                                <input type="text" name="nama" class="form-control" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Nomor Kartu Keluarga</label>
+                                <input type="text" name="no_kk" class="form-control" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">File Kartu Keluarga</label>
+                                <input type="file" name="kk" class="form-control" accept=".jpg,.jpeg,.png,.pdf" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Nomor Induk Kependudukan (NIK)</label>
+                                <input type="text" name="nik" class="form-control" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">File KTP</label>
+                                <input type="file" name="ktp" class="form-control" accept=".jpg,.jpeg,.png,.pdf" required>
+                            </div>
+                            <div class="mb-3">
+                           
+                        `;
+                } else if (id === 4) {
+                    fieldsHTML = `
+                            <div class="mb-3">
+                                <label class="form-label">Laporan insidentil/surat pengantar dari Kelurahan/Desa atau Camat (file)</label>
+                                <input type="file" name="Laporan_insidentil" class="form-control" accept=".jpg,.jpeg,.png,.pdf" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Nama</label>
+                                <input type="text" name="nama" class="form-control" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Nomor Kartu Keluarga</label>
+                                <input type="text" name="no_kk" class="form-control" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">File Kartu Keluarga</label>
+                                <input type="file" name="kk" class="form-control" accept=".jpg,.jpeg,.png,.pdf" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Nomor Induk Kependudukan (NIK)</label>
+                                <input type="text" name="nik" class="form-control" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">File KTP</label>
+                                <input type="file" name="ktp" class="form-control" accept=".jpg,.jpeg,.png,.pdf" required>
+                            </div>
+                          
+                            <div class="mb-3">
+                                <label class="form-label">Foto kejadian</label>
+                                <input type="file" name="kejadian" class="form-control" accept=".jpg,.jpeg,.png,.pdf">
+                            </div>
+                        `;
+                } else if (id === 5) {
+                    fieldsHTML = `
+                            <div class="mb-3">
+                                <label class="form-label">rekomendasi dari dinas (file)</label>
+                                <input type="file" name="rekomendasi" class="form-control" accept=".jpg,.jpeg,.png,.pdf" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Nama</label>
+                                <input type="text" name="nama" class="form-control" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Nomor Kartu Keluarga</label>
+                                <input type="text" name="no_kk" class="form-control" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">File Kartu Keluarga</label>
+                                <input type="file" name="kk" class="form-control" accept=".jpg,.jpeg,.png,.pdf" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Nomor Induk Kependudukan (NIK)</label>
+                                <input type="text" name="nik" class="form-control" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">File KTP</label>
+                                <input type="file" name="ktp" class="form-control" accept=".jpg,.jpeg,.png,.pdf" required>
+                            </div>
+                           
+                            <div class="mb-3">
+                                <label class="form-label">Surat permohonan dari pemohon</label>
+                                <input type="file" name="Suratpermohonan" class="form-control" accept=".jpg,.jpeg,.png,.pdf">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Surat keterangan berbadan sehat dari dokter rumah sakit pemerintah</label>
+                                <input type="file" name="SKB" class="form-control" accept=".jpg,.jpeg,.png,.pdf">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Surat keterangan kesehatan jiwa dari dokter spesialis jiwa dari rumah sakit jiwa (suami/istri)</label>
+                                <input type="file" name="SKKJ" class="form-control" accept=".jpg,.jpeg,.png,.pdf">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Surat keterangan tentang fungsi organ reproduksi (suami/istri) dari dokter spesialis Obstetric dan Ginekologi dari rumah sakit pemerintah</label> 
+                                <input type="file" name="SKFOR" class="form-control" accept=".jpg,.jpeg,.png,.pdf">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Foto Akte Kelahiran COTA</label>
+                                <input type="file" name="akte_cota" class="form-control" accept=".jpg,.jpeg,.png,.pdf">
+                            </div>  
+                            <div class="mb-3">
+                                <label class="form-label">Surat Keterangan catatan kepolisian setempat </label>
+                                <input type="file" name="SKCK" class="form-control" accept=".jpg,.jpeg,.png,.pdf">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Foto Nikah/Kutipan Akte Nikah orang tua COTA</label>
+                                <input type="file" name="akte_nikah" class="form-control" accept=".jpg,.jpeg,.png,.pdf">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Surat Keterangan Penghasilan dari tempat bekerja COTA</label>
+                                <input type="file" name="SKP" class="form-control" accept=".jpg,.jpeg,.png,.pdf">
+                            </div>  
+                            <div class="mb-3">
+                                <label class="form-label        ">Surat persyaratan persetujuan CAA di Atas kertas Bermaterai Cukup bagi Anak yang telah mampu menyampaikan pendapatnya dan hasil laporan pekerja sosial</label>
+                                <input type="file" name="SPPC" class="form-control" accept=".jpg,.jpeg,.png,.pdf">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Surat pernyataan Motivasi COTA mengangkat Anak Demi Kepentingan Bagi Anak dan Perlindungan Anak</label>
+                                <input type="file" name="SPM" class="form-control" accept=".jpg,.jpeg,.png,.pdf">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label    ">Surat pernyataan COTA akan memperlakukan anak kandung dan anak angkat tanpa diskriminasi</label>      
+                                <input type="file" name="SPCAD" class="form-control" accept=".jpg,.jpeg,.png,.pdf">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Surat pernyataan bahwa COTA akan memberitahu kepada anak angkat mengenai asal usul dan orang tua kandungnya</label>
+                                <input type="file" name="SPCA" class="form-control" accept=".jpg,.jpeg,.png,.pdf">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label    ">Surat pernyataan COTA tidak berhak menjadi wali nikah bagi anak angkat perempuan dan memberi kuasa kepada wali hakim</label>
+                                <input type="file" name="SPWT" class="form-control" accept=".jpg,.jpeg,.png,.pdf">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Surat pernyataan COTA akan memberikan hak waris/hibah atas harta kepada anak angkat sesuai ketentuan hukum islam yang berlaku di indonesia</label>
+                                <input type="file" name="SPHW" class="form-control" accept=".jpg,.jpeg,.png,.pdf">
+                            </div>  
+                            <div class="mb-3">
+                                <label class="form-label">Surat pernyataan persetujuan Adopsi dari pihak keluarga COTA</label>
+                                <input type="file" name="SPAK" class="form-control" accept=".jpg,.jpeg,.png,.pdf">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Laporan sosial CAA yang dibuat oleh pekerja sosial instansi sosial setempat dan pekerja sosial panti/yayasan</label>
+                                <input type="file" name="LSCAA" class="form-control" accept=".jpg,.jpeg,.png,.pdf">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">SK pemberian izin pengasuhan anak</label>
+                                <input type="file" name="SKIPA" class="form-control" accept=".jpg,.jpeg,.png,.pdf">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label    ">Surat/berita acara penyerahan dan kuasa dari pihak ibu kandung kepada instansi sosial setempat dan pekerja sosial panti/yayasan</label>
+                                <input type="file" name="SBAPK" class="form-control" accept=".jpg,.jpeg,.png,.pdf">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label    ">Surat/berita acara penyerahan dan kuasa dari pihak instansi sosial setempat dan pekerja sosial panti/yayasan </label>
+                                <input type="file" name="SBAPY" class="form-control" accept=".jpg,.jpeg,.png,.pdf">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label    ">Surat perjanjian pengasuhan anak antara panti/yayasan dengan COTA</label>
+                                <input type="file" name="SPPA" class="form-control" accept=".jpg,.jpeg,.png,.pdf">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label    ">Surat/berita acara penyerahan anak dari panti/yayasan kepada COTA</label>
+                                <input type="file" name="SBACA" class="form-control" accept=".jpg,.jpeg,.png,.pdf">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label    ">Laporan perkembangan anak yang dibuat oleh pekerja sosial instansi sosial setempat dan pekerja sosial panti/yayasan</label>
+                                <input type="file" name="LPAS" class="form-control" accept=".jpg,.jpeg,.png,.pdf">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Foto COTA dan CAA</label>
+                                <input type="file" name="foto_cota_caa" class="form-control" accept=".jpg,.jpeg,.png,.pdf">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Foto Akte Kelahiran COTA</label>  
+                                <input type="file" name="akte_cota" class="form-control" accept=".jpg,.jpeg,.png,.pdf">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Surat Keterangan catatan kepolisian setempat </label>
+                                <input type="file" name="SKCK" class="form-control" accept=".jpg,.jpeg,.png,.pdf">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Surat Keterangan penghasilan</label>
+                                <input type="file" name="SKP" class="form-control" accept=".jpg,.jpeg,.png,.pdf">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Surat persyaratan persetujuan CAA</label>
+                                <input type="file" name="SPP" class="form-control" accept=".jpg,.jpeg,.png,.pdf">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Surat pernyataan motivasi COTA</label>
+                                <input type="file" name="SPM" class="form-control" accept=".jpg,.jpeg,.png,.pdf">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Surat pernyataan COTA akan memperlakukan anak kandung dan anak angkat tanpa diskriminasi</label>
+                                <input type="file" name="SPCAD" class="form-control" accept=".jpg,.jpeg,.png,.pdf">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Surat pernyataan bahwa COTA akan memberitahu kepada anak angkat mengenai asal usul dan orang tua kandungnya</label>
+                                <input type="file" name="SPCA" class="form-control" accept=".jpg,.jpeg,.png,.pdf">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Surat pernyataan bahwa COTA akan memberitahu kepada anak angkat mengenai asal usul dan orang tua kandungnya</label>
+                                <input type="file" name="SPCA" class="form-control" accept=".jpg,.jpeg,.png,.pdf">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Surat pernyataan COTA tidak berhak menjadi wali nikah bagi anak angkat perempuan dan memberi kuasa kepada wali hakim</label>
+                                <input type="file" name="SPWT" class="form-control" accept=".jpg,.jpeg,.png,.pdf">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Surat pernyataan COTA akan memberikan hak waris/hibah atas harta kepada anak angkat sesuai ketentuan hukum islam yang berlaku di indonesia</label>
+                                <input type="file" name="SPHW" class="form-control" accept=".jpg,.jpeg,.png,.pdf">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Surat pernyataan persetujuan Adopsi dari pihak keluarga COTA</label>
+                                <input type="file" name="SPAK" class="form-control" accept=".jpg,.jpeg,.png,.pdf">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Laporan sosial CAA yang dibuat oleh pekerja sosial instansi sosial setempat dan pekerja sosial panti/yayasan</label>
+                                <input type="file" name="LSCAA" class="form-control" accept=".jpg,.jpeg,.png,.pdf">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">SK pemberian izin pengasuhan anak</label>
+                                <input type="file" name="SKIPA" class="form-control" accept=".jpg,.jpeg,.png,.pdf">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Surat/berita acara penyerahan dan kuasa dari pihak ibu kandung kepada instansi sosial setempat dan pekerja sosial panti/yayasan</label>
+                                <input type="file" name="SBAPK" class="form-control" accept=".jpg,.jpeg,.png,.pdf">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Surat/berita acara penyerahan dan kuasa dari pihak instansi sosial setempat dan pekerja sosial panti/yayasan </label>
+                                <input type="file" name="SBAPY" class="form-control" accept=".jpg,.jpeg,.png,.pdf">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Surat perjanjian pengasuhan anak antara panti/yayasan dengan COTA</label>
+                                <input type="file" name="SPPA" class="form-control" accept=".jpg,.jpeg,.png,.pdf">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Surat/berita acara penyerahan anak dari panti/yayasan kepada COTA</label>
+                                <input type="file" name="SBACA" class="form-control" accept=".jpg,.jpeg,.png,.pdf">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Laporan perkembangan anak yang dibuat oleh pekerja sosial instansi sosial setempat dan pekerja sosial panti/yayasan</label>
+                                <input type="file" name="LPAS" class="form-control" accept=".jpg,.jpeg,.png,.pdf">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Foto COTA dan CAA</label>
+                                <input type="file" name="foto_cota_caa" class="form-control" accept=".jpg,.jpeg,.png,.pdf">
+                            </div>
+                        
+
+                        `;
+                } else if (id === 7) {
+                    fieldsHTML = `
+                           
+                            <div class="mb-3">
+                                <label class="form-label">Nama</label>
+                                <input type="text" name="nama" class="form-control" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Nomor Kartu Keluarga</label>
+                                <input type="text" name="no_kk" class="form-control" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">File Kartu Keluarga</label>
+                                <input type="file" name="kk" class="form-control" accept=".jpg,.jpeg,.png,.pdf" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Nomor Induk Kependudukan (NIK)</label>
+                                <input type="text" name="nik" class="form-control" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">File KTP</label>
+                                <input type="file" name="ktp" class="form-control" accept=".jpg,.jpeg,.png,.pdf" required>
+                            </div>
+                         
+                            <div class="mb-3">
+                                <label class="form-label">Surat Keterangan Tidak Mampu (file)</label>
+                                <input type="file" name="sktm" class="form-control" accept=".jpg,.jpeg,.png,.pdf">
+                            </div>
+                        `;
+                } else if (id === 6) {
+                    fieldsHTML = `
+                          <div class="mb-3">
+                                <label class="form-label">Nama pasien</label>
+                                <input type="text" name="nama" class="form-control" required>
+                            </div>    
+
+                            <div class="mb-3">
+                                <label class="form-label">Nomor Kartu Keluarga</label>
+                                <input type="text" name="no_kk" class="form-control" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">File Kartu Keluarga</label>
+                                <input type="file" name="kk" class="form-control" accept=".jpg,.jpeg,.png,.pdf" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Nomor Induk Kependudukan (NIK)</label>
+                                <input type="text" name="nik" class="form-control" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">File KTP</label>
+                                <input type="file" name="ktp" class="form-control" accept=".jpg,.jpeg,.png,.pdf" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Nomor BPJS</label>
+                                <input type="text" name="no_bpjs" class="form-control">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">File BPJS</label>
+                                <input type="file" name="bpjs" class="form-control" accept=".jpg,.jpeg,.png,.pdf">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Surat Rujukan dari puskesmas/rumah sakit (file)</label>
+                                <input type="file" name="surat_rujukan" class="form-control" accept=".jpg,.jpeg,.png,.pdf" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Foto kartu JKN-KIS/BPJS kelas III (file)</label>
+                                <input type="file" name="foto_jkn" class="form-control" accept=".jpg,.jpeg,.png,.pdf" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Surat keterangan tidak mampu (file)</label>
+                                <input type="file" name="sktm" class="form-control" accept=".jpg,.jpeg,.png,.pdf" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Foto pasien sedang dirawat di rumah sakit (file)</label>
+                                <input type="file" name="foto_rawat" class="form-control" accept=".jpg,.jpeg,.png,.pdf" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Nomor hp yang dapat dihubungi</label>
+                                <input type="text" name="no_hp" class="form-control" required>
+                            </div>
+
+                        `;
+                } else if (id === 8) {
+                    fieldsHTML = `
+                           
+                            <div class="mb-3">
+                                <label class="form-label">Nama</label>
+                                <input type="text" name="nama" class="form-control" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Nomor Kartu Keluarga</label>
+                                <input type="text" name="no_kk" class="form-control" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">File Kartu Keluarga</label>
+                                <input type="file" name="kk" class="form-control" accept=".jpg,.jpeg,.png,.pdf" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Nomor Induk Kependudukan (NIK)</label>
+                                <input type="text" name="nik" class="form-control" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">File KTP</label>
+                                <input type="file" name="ktp" class="form-control" accept=".jpg,.jpeg,.png,.pdf" required>
+                            </div>
+                           
+                            <div class="mb-3">
+                                <label class="form-label">Surat keterangan dari kepolisian</label>
+                                <input type="file" name="skdk" class="form-control" accept=".jpg,.jpeg,.png,.pdf">
+                            </div>
+                        `;
+                } else if (id === 9) {
+                    fieldsHTML = `
+                            
+                            <div class="mb-3">
+                                <label class="form-label">Nama</label>
+                                <input type="text" name="nama" class="form-control" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Nomor Kartu Keluarga</label>
+                                <input type="text" name="no_kk" class="form-control" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">File Kartu Keluarga</label>
+                                <input type="file" name="kk" class="form-control" accept=".jpg,.jpeg,.png,.pdf" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Nomor Induk Kependudukan (NIK)</label>
+                                <input type="text" name="nik" class="form-control" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">File KTP</label>
+                                <input type="file" name="ktp" class="form-control" accept=".jpg,.jpeg,.png,.pdf" required>
+                            </div>
+                           
+                            <div class="mb-3">
+                                <label class="form-label">Surat keterangan tidak mampu</label>
+                                <input type="file" name="sktm" class="form-control" accept=".jpg,.jpeg,.png,.pdf">
+                            </div>
+                        `;
+                } else if (id === 10) {
+                    fieldsHTML = `
+                           
+                            <div class="mb-3">
+                                <label class="form-label">berita acara</label>
+                                <input type="file" name="berita_acara" class="form-control" accept=".jpg,.jpeg,.png,.pdf">
+                            </div>
+                        `;
+                } else if (id === 12) {
+                    fieldsHTML = `
+                          
+                            <div class="mb-3">
+                                <label class="form-label">surat permohonan izin untuk melakukan ziarah/wisata ke taman makam pahlawan kepada kepala dinas sosial Indragiri Hilir </label>
+                                <input type="file" name="ziarah" class="form-control" accept=".jpg,.jpeg,.png,.pdf">
+                            </div>
+                        `;
+                } else if (id === 11) {
+                    fieldsHTML += `
+                            <div class="mb-3">
+                                <label class="form-label">Status Data:</label><br>
+                                <label><input type="radio" name="status_data" value="terdata" required> Sudah Terdata</label><br>
+                                <label><input type="radio" name="status_data" value="tidak_terdata" required> Belum Terdata</label>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Transkrip Nilai (file)</label>
+                                <input type="file" name="transkrip" class="form-control" accept=".jpg,.jpeg,.png,.pdf" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Surat Keterangan Masih Aktif Kuliah</label>
+                                <input type="file" name="surat_aktif" class="form-control" accept=".jpg,.jpeg,.png,.pdf" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Foto Rumah (jika belum terdata)</label>
+                                <input type="file" name="foto_rumah" class="form-control" accept=".jpg,.jpeg,.png,.pdf">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Nama Lengkap</label>
+                                <input type="text" name="nama" class="form-control" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Nomor KTP</label>
+                                <input type="text" name="nik" class="form-control" required>
+                            </div>
+                        `;
+                } else if (id === 13) {
+                    fieldsHTML = `
+                            <div class="mb-3">
+                                <label class="form-label">Jenis Izin:</label><br>
+                                <label><input type="radio" name="jenis_izin" value="izin_sumbangan" required> Izin Sumbangan</label><br>
+                                <label><input type="radio" name="jenis_izin" value="izin_operasional" required> Izin Operasional</label>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Nama Organisasi</label>
+                                <input type="text" name="nama_organisasi" class="form-control" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Alamat Lengkap Organisasi</label>
+                                <textarea name="alamat_organisasi" class="form-control" required></textarea>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Waktu Pendirian Organisasi</label>
+                                <input type="date" name="waktu_pendirian" class="form-control" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Susunan Pengurus Organisasi (file)</label>
+                                <input type="file" name="susunan_pengurus" class="form-control" accept=".jpg,.jpeg,.png,.pdf" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Kegiatan Sosial yang Telah Dilaksanakan (file)</label>
+                                <input type="file" name="kegiatan_sosial" class="form-control" accept=".jpg,.jpeg,.png,.pdf" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Maksud dan Tujuan Pengumpulan Sumbangan</label>
+                                <textarea name="maksud_tujuan" class="form-control" required></textarea>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Waktu Penyelenggaraan Pengumpulan Sumbangan</label>
+                                <input type="text" name="waktu_penyelenggaraan" class="form-control" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Luas Wilayah Pengumpulan Sumbangan</label>
+                                <input type="text" name="luas_wilayah" class="form-control" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Cara Penyelenggaraan dan Penyaluran Sumbangan</label>
+                                <textarea name="cara_penyelenggaraan" class="form-control" required></textarea>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Rencana Pelaksanaan Proyek dan Anggaran Biaya (file)</label>
+                                <input type="file" name="rencana_anggaran" class="form-control" accept=".jpg,.jpeg,.png,.pdf" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Surat Permohonan Izin Operasional (file)</label>
+                                <input type="file" name="surat_permohonan_operasional" class="form-control" accept=".jpg,.jpeg,.png,.pdf" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Akta Pendirian Yayasan/Organisasi Sosial (file)</label>
+                                <input type="file" name="akta_pendirian" class="form-control" accept=".jpg,.jpeg,.png,.pdf" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Anggaran Dasar dan Anggaran Rumah Tangga Organisasi (file)</label>
+                                <input type="file" name="anggaran_dasar" class="form-control" accept=".jpg,.jpeg,.png,.pdf" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Riwayat Sejarah Pendirian Organisasi/Yayasan</label>
+                                <textarea name="riwayat_sejarah" class="form-control" required></textarea>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Program Kerja Organisasi (file)</label>
+                                <input type="file" name="program_kerja" class="form-control" accept=".jpg,.jpeg,.png,.pdf" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Daftar Jenis Pelayanan yang Diberikan</label>
+                                <textarea name="daftar_pelayanan" class="form-control" required></textarea>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Alamat Sekretariat Tetap dan Jelas</label>
+                                <textarea name="alamat_sekretariat" class="form-control" required></textarea>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Sumber Pembiayaan atau Harta Kekayaan yang Dimiliki</label>
+                                <textarea name="sumber_pembiayaan" class="form-control" required></textarea>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Izin Domisili dari Pemerintah Daerah Setempat (file)</label>
+                                <input type="file" name="izin_domisili" class="form-control" accept=".jpg,.jpeg,.png,.pdf" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Rekomendasi dan Pengisian Format Registrasi Pendaftaran (file)</label>
+                                <input type="file" name="rekomendasi_registrasi" class="form-control" accept=".jpg,.jpeg,.png,.pdf" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">NPWP (Nomor Pokok Wajib Pajak) (file)</label>
+                                <input type="file" name="npwp" class="form-control" accept=".jpg,.jpeg,.png,.pdf" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Rekening Bank Atas Nama Organisasi/Yayasan (file)</label>
+                                <input type="file" name="rekening_bank" class="form-control" accept=".jpg,.jpeg,.png,.pdf" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Foto KTP Pengurus (Ketua, Bendahara, Sekretaris) (file)</label>
+                                <input type="file" name="foto_ktp_pengurus" class="form-control" accept=".jpg,.jpeg,.png,.pdf" required>
+                            </div>
+                            <p class="text-muted">Catatan: Untuk Izin Operasional, pastikan semua dokumen lengkap sesuai persyaratan.</p>
+                        `;
+                }
+
+                syaratContainer.innerHTML = daftarHTML + fieldsHTML;
+            }
+
+            renderPersyaratan();
+
+            // Kirim form pengaduan
+            if (form) {
+                form.addEventListener("submit", async (e) => {
+                    e.preventDefault();
+                    const fd = new FormData(form);
+
+                    // Add id_layanan to form data
+                    fd.append("id_layanan", id);
+                    fd.append(
+                        "laporan",
+                        "Pengaduan untuk layanan: " + daftarLayanan[id - 1]
+                    );
+
+                    try {
+                        const res = await fetch(
+                            "http://127.0.0.1:8000/api/pengaduan",
+                            {
+                                method: "POST",
+                                body: fd,
+                            }
+                        );
+
+                        const data = await res.json();
+
+                        if (data && data.status === "success") {
+                            hasil.classList.remove("d-none", "alert-danger");
+                            hasil.classList.add("alert-success");
+                            hasil.innerHTML = `\n                                ✅ <b>${data.message}</b><br>\n                                Kode Laporan Anda: <b>${data.kode_laporan}</b><br>\n                                <a href="cek-laporan.html" class="btn btn-primary mt-2">Cek Status Laporan</a>`;
+                            form.reset();
+                        } else {
+                            hasil.classList.remove("d-none", "alert-success");
+                            hasil.classList.add("alert-danger");
+                            hasil.innerHTML =
+                                data && data.message
+                                    ? data.message
+                                    : "Terjadi kesalahan. Coba lagi.";
+                        }
+                    } catch (err) {
+                        hasil.classList.remove("d-none", "alert-success");
+                        hasil.classList.add("alert-danger");
+                        hasil.innerText =
+                            "Terjadi kesalahan jaringan. Silakan coba lagi.";
+                        console.error(err);
+                    }
+                });
+            }
+        </script>
+    </body>
+</html>

@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="id">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Cek Status Laporan - Dinas Sosial</title>
+        <link rel="icon" href="gambar/logodinassosial.png" />
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+        />
+        <script src="https://unpkg.com/feather-icons"></script>
+        <style>
+            /* ========== GLOBAL STYLES ========== */
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+                font-family: "Poppins", sans-serif;
+            }
+            body {
+                color: #222;
+                background: #f8f9fa;
+                line-height: 1.6;
+            }
+            a {
+                color: inherit;
+                text-decoration: none;
+            }
+            img {
+                max-width: 100%;
+                border-radius: 8px;
+            }
+
+            /* ========== HEADER SECTION ========== */
+            header {
+                border-top: 5px solid #0a3d62;
+                background: #fff;
+                box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+                position: sticky;
+                top: 0;
+                z-index: 999;
+            }
+
+            .header-top {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 0.8rem 2rem;
+                flex-wrap: wrap;
+            }
+
+            .logo-area {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+            }
+            .logo-area img {
+                width: 80px;
+                height: 70px;
+            }
+
+            .header-title {
+                font-size: 1.8rem;
+                font-weight: 600;
+                color: #0a3d62;
+            }
+
+            nav {
+                background: #0a3d62;
+            }
+
+            .navbar {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                gap: 2rem;
+                padding: 0.8rem 1rem;
+                list-style: none;
+            }
+
+            .navbar a {
+                color: #fff;
+                font-weight: 500;
+            }
+
+            .menu-toggle {
+                display: none;
+                color: rgb(36, 8, 244);
+                cursor: pointer;
+                size: 1.5rem;
+            }
+
+            @media (max-width: 768px) {
+                .navbar {
+                    display: none;
+                    flex-direction: column;
+                    background: #0a3d62;
+                }
+                .navbar.active {
+                    display: flex;
+                }
+                .menu-toggle {
+                    display: block;
+                    position: absolute;
+                    top: 18px;
+                    right: 20px;
+                }
+            }
+
+            /* ========== CHECK FORM ========== */
+            .check-container {
+                background: #fff;
+                padding: 2rem;
+                border-radius: 12px;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+                width: 100%;
+                max-width: 500px;
+                margin: 100px auto;
+            }
+
+            .check-container h2 {
+                text-align: center;
+                margin-bottom: 1.5rem;
+                color: #0a3d62;
+            }
+
+            .form-group {
+                margin-bottom: 1rem;
+            }
+
+            .form-group label {
+                display: block;
+                margin-bottom: 0.5rem;
+                font-weight: 500;
+            }
+
+            .form-group input {
+                width: 100%;
+                padding: 0.75rem;
+                border: 1px solid #ccc;
+                border-radius: 6px;
+                font-size: 1rem;
+            }
+
+            .btn {
+                width: 100%;
+                padding: 0.75rem;
+                background: #0a3d62;
+                color: #fff;
+                border: none;
+                border-radius: 6px;
+                font-size: 1rem;
+                cursor: pointer;
+                transition: background 0.3s;
+            }
+
+            .btn:hover {
+                background: #1e90ff;
+            }
+
+            .back-link {
+                text-align: center;
+                margin-top: 1rem;
+            }
+
+            .back-link a {
+                color: #0a3d62;
+                font-weight: 500;
+            }
+
+            .back-link a:hover {
+                text-decoration: underline;
+            }
+
+            /* ========== STATUS RESULT ========== */
+            .status-result {
+                margin-top: 2rem;
+                padding: 1.5rem;
+                border-radius: 8px;
+                background: #f8f9fa;
+                border-left: 4px solid #0a3d62;
+            }
+
+            .status-badge {
+                display: inline-block;
+                padding: 0.25rem 0.75rem;
+                border-radius: 20px;
+                font-size: 0.875rem;
+                font-weight: 500;
+            }
+
+            .status-baru {
+                background: #fff3cd;
+                color: #856404;
+            }
+            .status-diproses {
+                background: #cce5ff;
+                color: #004085;
+            }
+            .status-diterima {
+                background: #d1ecf1;
+                color: #0c5460;
+            }
+            .status-ditolak {
+                background: #f8d7da;
+                color: #721c24;
+            }
+            .status-selesai {
+                background: #d4edda;
+                color: #155724;
+            }
+            .status-menunggu {
+                background: #fff3cd;
+                color: #856404;
+            }
+        </style>
+    </head>
+    <body>
+        <!-- ===== HEADER SECTION ===== -->
+        <header>
+            <div class="header-top">
+                <div class="logo-area">
+                    <img src="gambar/KAB.Inhil.jpg" alt="Logo Dinas Sosial" />
+                    <img src="gambar/KEMENSOS.jpg" alt="Logo Dinas Sosial" />
+                    <img src="gambar/berakhlak.png" alt="Logo Dinas Sosial" />
+                    <img src="gambar/bangga.png" alt="Logo Dinas Sosial" />
+                    <span class="header-title"
+                        >Dinas Sosial Kabupaten Indragiri Hilir</span
+                    >
+                </div>
+                <i data-feather="menu" class="menu-toggle"></i>
+            </div>
+            <nav>
+                <ul class="navbar">
+                    <li><a href="index.html">Beranda</a></li>
+                    <li><a href="layanan.html">Layanan</a></li>
+                    <li><a href="berita.html">Berita</a></li>
+                    <li><a href="profil.html">Profil</a></li>
+                    <li><a href="kontak.html">Kontak</a></li>
+                    <li>
+                        <a href="cek-laporan.html" class="active"
+                            >cek laporan</a
+                        >
+                    </li>
+                    <li><a href="admin.php">Admin</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <!-- ===== CHECK FORM ===== -->
+        <div class="check-container">
+            <h2>Cek Status Laporan</h2>
+            <form id="cekForm">
+                <div class="form-group">
+                    <label for="kode">Kode Laporan</label>
+                    <input
+                        type="text"
+                        id="kode"
+                        name="kode"
+                        placeholder="Masukkan kode laporan (contoh: PGD-0001)"
+                        required
+                    />
+                </div>
+                <button type="submit" class="btn">Cek Status</button>
+            </form>
+
+            <div id="hasil" class="alert mt-4 d-none"></div>
+
+            <div class="back-link">
+                <a href="index.html">&larr; Kembali ke Beranda</a>
+            </div>
+        </div>
+
+        <script>
+            feather.replace();
+            const menuToggle = document.querySelector(".menu-toggle");
+            const navbar = document.querySelector(".navbar");
+            menuToggle.addEventListener("click", () => {
+                navbar.classList.toggle("active");
+            });
+
+            // Handle form submission
+            const form = document.getElementById("cekForm");
+            const hasil = document.getElementById("hasil");
+
+            form.addEventListener("submit", async (e) => {
+                e.preventDefault();
+                const kode = document.getElementById("kode").value.trim();
+
+                if (!kode) {
+                    hasil.classList.remove("d-none", "alert-success");
+                    hasil.classList.add("alert-danger");
+                    hasil.innerHTML = "Silakan masukkan kode laporan!";
+                    return;
+                }
+
+                try {
+                    const res = await fetch(
+                        window.location.origin +
+                            "/api/cek-laporan/" +
+                            encodeURIComponent(kode)
+                    );
+
+                    const data = await res.json();
+
+                    if (data.status === "success") {
+                        const pengaduan = data.data;
+                        const statusClass =
+                            "status-" +
+                            pengaduan.status.toLowerCase().replace(/\s+/g, "");
+
+                        hasil.classList.remove("d-none", "alert-danger");
+                        hasil.classList.add("alert-success");
+                        hasil.innerHTML = `
+                        <div class="status-result">
+                            <h5>Informasi Laporan</h5>
+                            <p><strong>Kode Laporan:</strong> ${
+                                pengaduan.kode_laporan
+                            }</p>
+                            <p><strong>Nama:</strong> ${pengaduan.nama}</p>
+                            <p><strong>NIK:</strong> ${pengaduan.nik || "-"}</p>
+                            <p><strong>Laporan:</strong> ${
+                                pengaduan.laporan
+                            }</p>
+                            <p><strong>Status:</strong> <span class="status-badge ${statusClass}">${pengaduan.status.toUpperCase()}</span></p>
+                            <p><strong>Tanggal Pengajuan:</strong> ${new Date(
+                                pengaduan.created_at
+                            ).toLocaleDateString("id-ID")}</p>
+                            ${getStatusMessage(pengaduan)}
+                        </div>
+                    `;
+                    } else {
+                        hasil.classList.remove("d-none", "alert-success");
+                        hasil.classList.add("alert-danger");
+                        hasil.innerHTML =
+                            data.message || "Laporan tidak ditemukan!";
+                    }
+                } catch (err) {
+                    hasil.classList.remove("d-none", "alert-success");
+                    hasil.classList.add("alert-danger");
+                    hasil.innerText =
+                        "Terjadi kesalahan jaringan. Silakan coba lagi.";
+                    console.error(err);
+                }
+            });
+
+            function getStatusMessage(pengaduan) {
+                if (pengaduan.status === "diproses") {
+                    const messages = {
+                        1: "Layanan Penyandang Disabilitas > sedang di proses, tunggu 1 hari kerja.",
+                        2: "Layanan Anak dan Lanjut Usia (Lansia) > sedang di proses, tunggu 2 hari kerja.",
+                        3: "Layanan Pengangkatan Anak Calon Orang Tua Angkat (COTA) antar Warga Negara Indonesia> jangka waktu selama 6 bulan.",
+                        4: "Layanan Transportasi Rujukan Pasien > jangka waktu 2 minggu/lebih",
+                        5: "Layanan Gelandangan, Pengemis, Orang dengan HIV/AIDS (ODHA) > jangka waktu 3 hari.",
+                        6: "Layanan Bantuan Sosial bagi Korban Bencana Alam dan Non Alam > jangka waktu 1 hari kerja setelah persyaratan dilengkapi",
+                        7: "Layanan Program Keluarga Harapan (PKH) > jangka waktu 4 hari",
+                        8: "Layanan Pemulangan Orang Terlantar (OT) > jangka waktu 1 hari kerja setelah persyaratan dilengkapi",
+                        9: "Layanan Pengusulan PBI APBD dan PBI JK > jangka waktu 1-4 hari kerja. Silahkan cek kembali nanti.",
+                        10: "Layanan pengusulan Data Terpadu Kesejahteraan Sosial (DTKS) > 1 bulan kerja",
+                        11: "Layanan Rekomendasi Beasiswa Terdaftar dan Tidak Terdaftar di DTKS >  1 hari – 4 hari kerja silahkan cek disini.",
+                        12: "Layanan Izin Ziarah TMP Yudha Bhakti > 3 hari kerja.",
+                        13: "Layanan Izin Sumbangan dan Operasional > 3 hari kerja.",
+                    };
+                    return `<p><strong>Pesan:</strong> ${
+                        messages[pengaduan.id_layanan] ||
+                        "Laporan sedang diproses."
+                    }</p>`;
+                } else if (pengaduan.status === "selesai") {
+                    const messages = {
+                        1: "Layanan Penyandang Disabilitas > data anda sudah masuk di data PMKS penyandang disabilitas",
+                        2: "Layanan Anak dan Lanjut Usia (Lansia) > data anda sudah masuk di data PMKS",
+                        3: "Layanan Pengangkatan Anak Calon Orang Tua Angkat (COTA) antar Warga Negara Indonesia> info lebih lanjut ke ruang rehabilitasi sosial, dinas sosial Indragiri Hilir.",
+                        4: "Layanan Transportasi Rujukan Pasien > bantuan anda sudah cair.",
+                        5: "Layanan Gelandangan, Pengemis, Orang dengan HIV/AIDS (ODHA) > anda sudah terdaftar sebagai PMKS.",
+                        6: "Layanan Bantuan Sosial bagi Korban Bencana Alam dan Non Alam > bantuan akan di kirim.",
+                        7: "Layanan Program Keluarga Harapan (PKH) > data anda terdata sebagai penerima PKH",
+                        8: "Layanan Pemulangan Orang Terlantar (OT) > selamat anda akan di pulangkan ke kampung halaman.",
+                        9: "Layanan Pengusulan PBI APBD dan PBI JK > kartu Indonesia sehat anda sudah siap!",
+                        10: "Layanan pengusulan Data Terpadu Kesejahteraan Sosial (DTKS) > data anda sudah masuk kedalam Data Terpadu Kesejahteraan Sosial (DTKS)",
+                        11: "Layanan Rekomendasi Beasiswa Terdaftar dan Tidak Terdaftar di DTKS >  surat rekomendasi anda sudah keluar silahkan ambil di bagian pelayanan Dinas Sosial Indragiri Hilir.",
+                        12: "Layanan Izin Ziarah TMP Yudha Bhakti > surat izin anda sudah keluar.",
+                        13: "Layanan Izin Sumbangan dan Operasional > surat izin anda sudah keluar.",
+                    };
+                    return `<p><strong>Pesan:</strong> ${
+                        messages[pengaduan.id_layanan] ||
+                        "Laporan telah selesai diproses."
+                    }</p>`;
+                }
+                return "";
+            }
+        </script>
+    </body>
+</html>

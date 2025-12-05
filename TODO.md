@@ -1,9 +1,1 @@
--   [x] Update Pengaduan model fillable fields
--   [x] Fix pengaduan.html to pass id_layanan correctly
--   [x] Create cek-laporan.html page
--   [x] Update admin/pengaduan.blade.php with proper buttons
--   [x] Update PengaduanController for delete and status messages
--   [x] Add delete route for pengaduan
--   [x] Create database migration for pengaduan table
--   [x] Start PHP development server on localhost:3000
--   [ ] Test complete user and admin flows (database connection issue prevents full testing)
+
